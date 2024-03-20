@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListBarangController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -15,9 +17,38 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function() {
+        return 'Admin Dashboard';
+    });
+
+    Route::get('/users', function () {
+        return 'Admin Users';
+    });
+
+});
+
+Route::get('/Pembeli', function () {
+    return view('pembeli');
+});
+
+// Route::get('/ListBarang', function () {
+//     return view('list_barang');
+// });
+
+Route::get('/list-barang', [ListBarangController::class, 'tampilkan']);
+
+// Route::get('/listbarang/{id}/{nama}', [ListBarangController::class, 'tampilkan']);
+
+
+
+// Route::get('/user/{id}', function ($id) {
+//     return 'User dengan ID' . $id;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/contact', [HomeController::class, 'contact']);
+
+
+Route::get('/list-product', [ProductController::class, 'listProduct']);
